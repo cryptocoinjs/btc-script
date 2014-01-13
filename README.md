@@ -15,9 +15,7 @@ Install
 
 ### Script
 
-```html
-<script src="/path/to/btc-script.js"></script>
-```
+(TODO)
 
 
 Usage
