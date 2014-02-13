@@ -23,6 +23,6 @@
     "btc-opcode": "0.0.1",
     "btc-address": "~0.4.0",
     "crypto-hashing": "~0.1.0",
-    "convert-hex": "~0.1.0"
+    "binstring": "~0.2.0"
   }
 }
