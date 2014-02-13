@@ -1,4 +1,4 @@
-0.1.0 / 2014-03-13
+0.1.1 / 2014-03-13
 ------------------
 * Made script type setting an explicit parameter passed to `createOutputScript()` rather than guessing based on version
 * removed method `simpleInHash()`. Closes #1
@@ -6,6 +6,7 @@
 * fixed correct output type in `getOutType()` Closes #6
 * added `defaultNetworkType`, implicitly sets `Address.defaultNetworkType`
 * replaced `convert-hex` for `binstring`
+* (straight to 0.1.1, bug in NPM: https://github.com/npm/npm/issues/4653)
 
 
 0.0.2 / 2014-02-04
