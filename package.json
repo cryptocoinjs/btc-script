@@ -1,6 +1,6 @@
 {
   "name": "btc-script",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Script support for Bitcoin.",
   "keywords": [
     "crytography",
