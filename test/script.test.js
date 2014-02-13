@@ -34,6 +34,28 @@ describe('Script', function() {
     })
   })
 
+  describe(' - Script.createOutputScript()', function() {
+    it(' > Supports pubkeyhash addresses', function() {
+      // hash160 : 0000000000000000000000000000000000000000
+      var pubkeyScript = Script.createOutputScript('1111111111111111111114oLvT2')
+      EQ(pubkeyScript.chunks[2].length, 20)
+      for (var i in pubkeyScript.chunks[2]) {
+        EQ(pubkeyScript.chunks[2][i], 0)
+      }
+      EQ(pubkeyScript.getOutType(), 'pubkeyhash')
+    })
+
+    it(' > Supports scripthash addresses', function() {
+      // hash160 : 0000000000000000000000000000000000000000
+      var scripthashScript = Script.createOutputScript('31h1vYVSYuKP6AhS86fbRdMw9XHieotbST')
+      EQ(scripthashScript.chunks[1].length, 20)
+      for (var i in scripthashScript.chunks[1]) {
+        EQ(scripthashScript.chunks[1][i], 0)
+      }
+      EQ(scripthashScript.getOutType(), 'scripthash')
+    })
+  })
+
   describe('- Script.getOutType()', function() {
     it(' > Supports Pubkeyhash', function() {
       // https://helloblock.io/mainnet/transactions/dc55d9c6ec03ceccf0db43d29e7d626a8b107f41066e3917f30398bb01dda2b5
@@ -83,6 +105,19 @@ describe('Script', function() {
       EQ(binConv(addr.hash, { in : 'bytes',
         out: 'hex'
       }), '119b098e2e980a229e139a9ed01a469e518e6f26')
+    })
+  })
+
+  describe(' - Setting defaultNetwork', function() {
+    it(' > defaults to mainnet and supports testnet', function() {
+      // hash160: 0000000000000000000000000000000000000000
+      Script.defaultNetwork = 'testnet'
+      var pubkeyhashScript = Script.createOutputScript('mfWxJ45yp2SFn7UciZyNpvDKrzbhyfKrY8')
+      EQ(pubkeyhashScript.chunks[2].length, 20)
+      for (var i in pubkeyhashScript.chunks[2]) {
+        EQ(pubkeyhashScript.chunks[2][i], 0)
+      }
+      EQ(pubkeyhashScript.getOutType(), 'pubkeyhash')
     })
   })
 })
