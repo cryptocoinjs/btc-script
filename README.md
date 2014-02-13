@@ -13,9 +13,6 @@ Install
     npm install --save btc-script
 
 
-### Script
-
-(TODO)
 
 
 Usage
