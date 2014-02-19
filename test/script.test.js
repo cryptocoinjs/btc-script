@@ -1,5 +1,6 @@
 var Script = require('../')
 var binConv = require('binstring')
+var _ = require('underscore')
 
 require('terst')
 
@@ -118,6 +119,25 @@ describe('Script', function() {
         EQ(pubkeyhashScript.chunks[2][i], 0)
       }
       EQ(pubkeyhashScript.getOutType(), 'pubkeyhash')
+    })
+  })
+
+  describe(' - Script(hex, isCoinbase)', function() {
+    it(' > optional second field to indicate coinbase and does not interpret coinbase script', function() {
+      // reference:
+      // https://github.com/cryptocoinjs/btc-script/issues/8
+      // BIP34: https: //github.com/bitcoin/bips/blob/master/bip-0034.mediawiki
+      // Stackoverflow: http: //bitcoin.stackexchange.com/questions/20721/what-is-the-format-of-coinbase-transaction
+
+      // optional second field
+      var coinbaseScript = new Script('03d891000450a8eb0b4ed20100', true)
+      T(_.isEqual(coinbaseScript.buffer, coinbaseScript.buffer))
+    })
+
+    it(' > getBlockHeight() is able to parse blockheight', function() {
+      // http://blockexplorer.com/testnet/tx/eaff2bbc220caa80f1ee52b2ed3fb586b26e253d2dee039fd6c54ec8493aa1d8
+      var coinbaseScript = new Script('03d891000450a8eb0b4ed20100', true)
+      EQ(coinbaseScript.getBlockHeight(), 37336)
     })
   })
 })
