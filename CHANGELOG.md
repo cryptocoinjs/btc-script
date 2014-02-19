@@ -1,3 +1,7 @@
+0.1.3 / 2014-02-19
+------------------
+* Bugfix - Add script validation rules; exclude scripts over 10,000 bytes
+
 0.1.2 / 2014-0218
 -----------------
 * Bugfix - better validation for standard output script types
