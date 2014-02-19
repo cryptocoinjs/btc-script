@@ -1,3 +1,8 @@
+0.1.2 / 2014-0218
+-----------------
+* Bugfix - better validation for standard output script types
+* Bugfix - optional field to indicate to not parse BIP34 coinbase input scripts
+
 0.1.1 / 2014-03-13
 ------------------
 * Made script type setting an explicit parameter passed to `createOutputScript()` rather than guessing based on version
