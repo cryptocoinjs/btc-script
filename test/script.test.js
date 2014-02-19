@@ -93,6 +93,17 @@ describe('Script', function() {
       var opreturnScript = new Script(outHex)
       EQ(opreturnScript.getOutType(), 'nonstandard')
     })
+
+    it(' > nonstandard (zero byte as hash160 in pubkeyhash)', function() {
+      // http://testnet.helloblock.io/transactions/a347b4ef02173b74deb096921d8306ff7c379c254e9febaa040024b220a348ed
+      var nonstandardpubkeyhash = new Script('76a90088ac')
+      EQ(nonstandardpubkeyhash.getOutType(), 'nonstandard')
+    })
+
+    it(' > nonstandard (zero byte as hash160 in scripthash)', function() {
+      var nonstandardpubkeyhash = new Script('a90087')
+      EQ(nonstandardpubkeyhash.getOutType(), 'nonstandard')
+    })
   })
 
   describe('- Script.toAddress()', function() {
