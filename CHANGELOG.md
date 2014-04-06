@@ -1,3 +1,7 @@
+0.1.4 / 2014-04-05
+-----------------
+* Support OPRETURN
+
 0.1.3 / 2014-02-19
 ------------------
 * Bugfix - Add script validation rules; exclude scripts over 10,000 bytes
