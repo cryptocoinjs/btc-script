@@ -126,6 +126,31 @@ describe('Script', function() {
     })
   })
 
+  describe(' - Script.toAddresses()', function() {
+    it(' > returns addresses for multisig', function() {
+      // https://helloblock.io/transactions/09dd94f2c85262173da87a745a459007bb1eed6eeb6bfa238a0cd91a16cf7790
+      var outHex = '5121032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca330162102308673d16987eaa010e540901cc6fe3695e758c19f46ce604e174dac315e685a52ae'
+      var multisigScript = new Script(outHex)
+      EQ(multisigScript.getOutType(), 'multisig')
+      var addrs = multisigScript.toAddresses()
+      EQ(addrs[0].toString(), '17rExRiMaJGgHPVuYjHL21mEhfzbRPRkui')
+      EQ(addrs[1].toString(), '1GUx7qydsHMWaMtF728HfSX1EQpQrZccdb')
+
+      // https://helloblock.io/transactions/bf13f377de6714509eedaf2377ea2938e98a609c3351b3a7b9011a3513664176
+      var outHex = '5121032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca330162102308673d16987eaa010e540901cc6fe3695e758c19f46ce604e174dac315e681552ae'
+      var multisigScript = new Script(outHex)
+      EQ(multisigScript.getOutType(), 'multisig')
+      var addrs = multisigScript.toAddresses()
+      EQ(addrs[0].toString(), '17rExRiMaJGgHPVuYjHL21mEhfzbRPRkui')
+      EQ(addrs[1].toString(), '15kaEh1RR8jkzb13LDLCe8x6n1VfevxSpo')
+    })
+    it('> returns addresses for pubkeyhash', function() {
+      var outHex = '76a9140c79f15f08b0f94a2cba8de036272dee3ecb096188ac'
+      var pubkeyhashScript = new Script(outHex)
+      EQ(pubkeyhashScript.toAddresses()[0].toString(), '128yC3L6zguTqfKTA1z18EuGMoV5tkHkR6')
+    })
+  })
+
   describe(' - Setting defaultNetwork', function() {
     it(' > defaults to mainnet and supports testnet', function() {
       // hash160: 0000000000000000000000000000000000000000
