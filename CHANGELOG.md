@@ -1,3 +1,7 @@
+0.1.5 / 2014-04-09
+-----------------
+* Multisig Escrows Addresses Support
+
 0.1.4 / 2014-04-05
 -----------------
 * Support OPRETURN
