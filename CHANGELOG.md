@@ -1,4 +1,4 @@
-0.1.5 / 2014-04-09
+0.1.6 / 2014-04-09
 -----------------
 * Multisig Escrows Addresses Support
 
