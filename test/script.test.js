@@ -133,16 +133,18 @@ describe('Script', function() {
       var multisigScript = new Script(outHex)
       EQ(multisigScript.getOutType(), 'multisig')
       var addrs = multisigScript.toAddresses()
+      EQ(addrs.length, 2);
       EQ(addrs[0].toString(), '17rExRiMaJGgHPVuYjHL21mEhfzbRPRkui')
       EQ(addrs[1].toString(), '1GUx7qydsHMWaMtF728HfSX1EQpQrZccdb')
 
-      // https://helloblock.io/transactions/bf13f377de6714509eedaf2377ea2938e98a609c3351b3a7b9011a3513664176
-      var outHex = '5121032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca330162102308673d16987eaa010e540901cc6fe3695e758c19f46ce604e174dac315e681552ae'
+      // https://test.helloblock.io/transactions/f823bd777b9a3e4a7dda9523ad90785e5bc68710c173788f21e2fe2df3cfea8f
+      var outHex = '52210266816de738c62ad789119fdb13131faa13f588359484ca61d0515cdcc7648ecd21025fe4a325d96f109529734af5de80b961274de5720c30646c398202e5d555adca52ae'
       var multisigScript = new Script(outHex)
       EQ(multisigScript.getOutType(), 'multisig')
-      var addrs = multisigScript.toAddresses()
-      EQ(addrs[0].toString(), '17rExRiMaJGgHPVuYjHL21mEhfzbRPRkui')
-      EQ(addrs[1].toString(), '15kaEh1RR8jkzb13LDLCe8x6n1VfevxSpo')
+      var addrs = multisigScript.toAddresses('testnet')
+      EQ(addrs.length, 2);
+      EQ(addrs[0].toString(), 'n2QXt6v6F9LTLCTjD6ZBHynWcx7Fo8991s')
+      EQ(addrs[1].toString(), 'moiaQ6szVvA1ccC25eo26jnHxr8R1Jt5Ze')
     })
     it('> returns addresses for pubkeyhash', function() {
       var outHex = '76a9140c79f15f08b0f94a2cba8de036272dee3ecb096188ac'
