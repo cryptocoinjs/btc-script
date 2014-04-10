@@ -192,4 +192,31 @@ describe('Script', function() {
       EQ(coinbaseScript.getBlockHeight(), 37336)
     })
   })
+
+  describe(' - toASM', function() {
+    it(' > supports standard script type', function() {
+      var scripts = [{
+        hex: 'a914f9659d50ec62945a9c8a6c07f117ef63a4f2fcc487',
+        asm: 'OP_HASH160 f9659d50ec62945a9c8a6c07f117ef63a4f2fcc4 OP_EQUAL'
+      }, {
+        hex: '410496b538e853519c726a2c91e61ec11600ae1390813a627c66fb8be7947be63c52da7589379515d4e0a604f8141781e62294721166bf621e73a82cbf2342c858eeac',
+        asm: '0496b538e853519c726a2c91e61ec11600ae1390813a627c66fb8be7947be63c52da7589379515d4e0a604f8141781e62294721166bf621e73a82cbf2342c858ee OP_CHECKSIG'
+      }, {
+        hex: '5121032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca330162102308673d16987eaa010e540901cc6fe3695e758c19f46ce604e174dac315e685a52ae',
+        asm: 'OP_1 032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca33016 02308673d16987eaa010e540901cc6fe3695e758c19f46ce604e174dac315e685a OP_2 OP_CHECKMULTISIG'
+      }, {
+        hex: '76a9140c79f15f08b0f94a2cba8de036272dee3ecb096188ac',
+        asm: 'OP_DUP OP_HASH160 0c79f15f08b0f94a2cba8de036272dee3ecb0961 OP_EQUALVERIFY OP_CHECKSIG'
+      }, {
+        hex: '48304502203cb2b3dfeddaa2790d5ee4bf91fe42c429c583e1189905cfbfe3c079d514ddc0022100d002b19049286e0201e847774bb99e7e18486e66b6b75dd0f4d6e494597b8c660121032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca33016',
+        asm: '304502203cb2b3dfeddaa2790d5ee4bf91fe42c429c583e1189905cfbfe3c079d514ddc0022100d002b19049286e0201e847774bb99e7e18486e66b6b75dd0f4d6e494597b8c6601 032487c2a32f7c8d57d2a93906a6457afd00697925b0e6e145d89af6d3bca33016'
+      }]
+
+      for (var i = 0; i < scripts.length; i++) {
+        var s = scripts[i]
+        var script = new Script(s.hex)
+        EQ(script.toASM(), s.asm)
+      }
+    })
+  })
 })
