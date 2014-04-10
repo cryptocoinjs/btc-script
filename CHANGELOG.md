@@ -1,3 +1,7 @@
+0.1.8 / 2014-04-10
+-----------------
+* ASM support
+
 0.1.7 / 2014-04-09
 -----------------
 * Multisig Escrows Addresses Support
