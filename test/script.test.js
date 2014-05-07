@@ -94,6 +94,15 @@ describe('Script', function() {
       EQ(multisigScript.getOutType(), 'nonstandard')
     })
 
+    it(' Supports invalid Multisig', function() {
+      // https://helloblock.io/transactions/4142ee4877eb116abf955a7ec6ef2dc38133b793df762b76d75e3d7d4d8badc9
+      var outHex = '52210352f2e34760514099f90b03aab91239466924c3b06047d3cf0e011f26ef96ceb7210207cf5fb65d6923d5d41db21ceac9567a0fc3eb92c6137f274018381ced7b65680053ae'
+      var multisigScript = new Script(outHex)
+      EQ(multisigScript.getOutType(), 'nonstandard')
+      // asm: 2 0352f2e34760514099f90b03aab91239466924c3b06047d3cf0e011f26ef96ceb7 0207cf5fb65d6923d5d41db21ceac9567a0fc3eb92c6137f274018381ced7b6568 0 3 OP_CHECKMULTISIG
+
+    })
+
     it(' > Supports null_data (OP_RETURN)', function() {
       var outHex = '6a4c105768792068656c6c6f2074686572652e'
       var nulldataScript = new Script(outHex)
