@@ -1,3 +1,7 @@
+0.1.9 / 2014-04-10
+------------------
+Bugfix - detect zero byte pubkeys in a nonstandard multisig
+
 0.1.8 / 2014-04-10
 -----------------
 * ASM support
