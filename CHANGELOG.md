@@ -1,3 +1,7 @@
+0.2.0 / 2014-05-13
+------------------
+Bugfix - clone script in .toASM()
+
 0.1.9 / 2014-04-10
 ------------------
 Bugfix - detect zero byte pubkeys in a nonstandard multisig
