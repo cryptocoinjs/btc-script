@@ -1,6 +1,8 @@
 var Script = require('../')
 var binConv = require('binstring')
 var _ = require('underscore')
+var Address = require('btc-address')
+var sha256ripe160 = require('crypto-hashing').sha256ripe160
 
 require('terst')
 
@@ -227,5 +229,38 @@ describe('Script', function() {
         EQ(script.toASM(), s.asm)
       }
     })
+  })
+  describe(' - Script.createMultiSigOutputScript', function() {
+    // sorted in the way createMultiSigOutputScript sorts them internally
+    var pubkeys = [ "026b0964dd480712cced3fa2938afb1c25bf2ff893a7efab611de53bb582e422f9",
+                    "03822a3e30f86e30a0c7de273cca0201f0b9e8e629834b172cf1e8ef19d4695f31",
+                    "03299a2ecb85d4d435cbe0f033780bd5c57cc216afed291f59e89a14f9845f8f0e"
+                  ].map(function(pubkey){
+                    return binConv(pubkey, { in: 'hex', out: 'bytes' })
+                  })
+    var unsorted_pubkeys = [ pubkeys[2], pubkeys[0], pubkeys[1] ]
+    it(' > Creates multisig scripts', function() {
+      var script = Script.createMultiSigOutputScript(2, pubkeys)
+      EQ(toAddress(script), '34qjQhsQbXHhD9fZwY8YmFSLiiQcNJeLwQ')
+    })
+    it(' > Has implicit sorting', function() {
+      var script = Script.createMultiSigOutputScript(2, unsorted_pubkeys)
+      EQ(toAddress(script), '34qjQhsQbXHhD9fZwY8YmFSLiiQcNJeLwQ')
+    })
+    it(' > Allows to specify explicit sorting', function() {
+      var script = Script.createMultiSigOutputScript(2, unsorted_pubkeys, true)
+      EQ(toAddress(script), '3JGpyvuKUoK6aK38zZey6anGdY6DkQnv3s')
+      var script = Script.createMultiSigOutputScript(2, pubkeys, true)
+      EQ(toAddress(script), '34qjQhsQbXHhD9fZwY8YmFSLiiQcNJeLwQ')
+    })
+    it(' > Does not mutate the public keys', function() {
+      EQ(new Buffer(unsorted_pubkeys[0]).toString('hex'), new Buffer(pubkeys[2]).toString('hex'))
+      EQ(new Buffer(unsorted_pubkeys[1]).toString('hex'), new Buffer(pubkeys[0]).toString('hex'))
+      EQ(new Buffer(unsorted_pubkeys[2]).toString('hex'), new Buffer(pubkeys[1]).toString('hex'))
+    })
+
+    function toAddress(script) {
+      return '' + new Address(sha256ripe160(script.buffer, { out: 'bytes' }), 'scripthash', 'mainnet');
+    }
   })
 })
