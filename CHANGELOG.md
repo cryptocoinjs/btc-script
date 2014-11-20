@@ -1,4 +1,8 @@
-0.2.0 / 2014-05-13
+0.1.11 / 2014-11-20
+-------------------
+* Allow to set explicit sorting for public keys in multisig (#13)
+
+0.1.10 / 2014-05-13
 ------------------
 Bugfix - clone script in .toASM()
 
